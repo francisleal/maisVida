@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<div class="col-12 col-md-12" ng-init="carregarEstados();">
+
+    <h6 class="border-bottom border-gray pb-2 mb-0">Cadastro de Médicos</h6>
+    <br>
+    <div class="content">
+        <form id="formMedico" ng-submit="salvarMedico();">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Nome do Médico
+                            <input type="text" ng-model="medico.primeiroNome" class="form-control border-input" placeholder="Nome do Médico" required="required">
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Útimo Nome
+                            <input type="text" ng-model="medico.segundoNome" class="form-control border-input" placeholder="Nome do Médico" required="required">
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for "Especialidade">Especialidade
+                            <select class="form-control custom-select d-block w-100" ng-model="medico.especialidade" required="required">
+                                <option value="">Selecione...</option>
+                                <option value="Cardiologista">Cardiologista</option>
+                                <option value="Anestesiologia">Anestesiologia</option>
+                                <option value="Cancerologia">Cancerologia</option>
+                                <option value="Endoscopia">Endoscopia</option>
+                                <option value="Alergia e Imunologia">Alergia e Imunologia</option>
+                                <option value="Cancerologia">Cancerologia</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for "telefone">Email
+                            <input type="email" id="email" ng-model="medico.email" class="form-control border-input" placeholder="email" required="required">
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="text-center">Ativo
+                            <input type="checkbox" ng-model="medico.ativo" class="form-control" style="margin-top:10px" />
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label>Status
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="status">
+                                    <input type="radio" ng-model="medico.status" name="radioButton" value="Ocupado" class="form-control" required="required" checked="checked" />
+                                    <p>Ocupado</p>
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="status">
+                                    <input type="radio" ng-model="medico.status" name="radioButton" value="Disponível" class="form-control" />
+                                    <p>Disponível</p>
+                                </label>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Estado
+                            <select class="form-control custom-select d-block w-100" id="estados" ng-model="medico.estado" required="required">
+                                <option value="">Selecione...</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Cidades
+                            <select class="form-control custom-select d-block w-100" id="cidades" ng-model="medico.cidade" required="required">
+                                <option value="">Selecione...</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-info btn-fill btn-wd">Salvar Médico</button>
+            <button type="submit" class="btn btn-info btn-fill btn-wd" ng-click="$scope.medico={}">Cancelar</button>
+        </form>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+
+        $.getJSON('resources/js/estados_cidades.json', function(data) {
+
+            var items = [];
+            var options = '<option value="">Selecione...</option>';
+
+            $.each(data, function(key, val) {
+                options += '<option value="' + val.sigla + '">' + val.sigla + '</option>';
+            });
+            $("#estados").html(options);
+
+            $("#estados").change(function() {
+
+                var options_cidades = '';
+                var str = "";
+
+                $("#estados option:selected").each(function() {
+                    str += $(this).text();
+                });
+
+                $.each(data, function(key, val) {
+                    if (val.sigla == str) {
+                        $.each(val.cidades, function(key_city, val_city) {
+                            options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+                        });
+                    }
+                });
+
+                $("#cidades").html(options_cidades);
+
+            }).change();
+
+        });
+
+    });
+</script>
+
+</html>

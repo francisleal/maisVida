@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="app">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="francis.leal">
+	
+	<title>Mais Vida</title>
+	
+    <link href="resources/css/bootstrap.css" rel="stylesheet">
+    <link href="resources/css/offcanvas.css" rel="stylesheet">
+    <link href="resources/css/maisVida.css" rel="stylesheet">
+    
+    <script src="resources/js/jquery.js"></script>
+    <script src="resources/js/bootstrap.js"></script>
+    <script src="resources/js/offcanvas.js"></script>
+    <script src="resources/js/angular.min.js"></script>
+    <script src="resources/js/angular-route.js"></script>
+    <script src="resources/js/angular-resource.js"></script>
+    <script src="resources/js/angular-animate.js"></script>
+    <script src="resources/js/angular-locale_pt-br.js"></script>
+    <script src="resources/js/app.js"></script>
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Mais Vida</a>
+        <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#medicolist">Listagem de médicos <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#medico/cadastro">Cadastro de médicos</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="#medicolist">Listagem de médicos</a>
+                        <a class="dropdown-item" href="#medico/cadastro">Cadastro de médicos</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" id="Pesquisa" ng-submit="listarMedicos()">
+                <input type="text" class="form-control mr-sm-2" placeholder="Pesquisa"  ng-model="filtro">
+                <a class="btn btn-outline-success my-2 my-sm-0" href="#medicolist">Pesquisa</a>
+            </form>
+        </div>
+    </nav>
+    <div class="nav-scroller bg-white box-shadow">
+        <nav class="nav nav-underline">
+            <a class="nav-link" href="#">Suggestions</a>
+            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Link</a>
+        </nav>
+    </div>
+    <main role="main" class="container">
+        <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
+            <div class="lh-100">
+                <h6 class="mb-0 text-white lh-100 s2">Mais Vida</h6>
+            </div>
+        </div>
+        <!--ng-view-->
+        <div class="my-3 p-3 bg-white rounded box-shadow maisvidaview" ng-view>
+        </div>
+        <!--/ng-view-->
+    </main>
+</body>
+
+</html>
