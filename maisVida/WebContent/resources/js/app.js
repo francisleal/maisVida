@@ -15,6 +15,12 @@ app.config(function($routeProvider) {
         controller: "medicoController",
         templateUrl: "medico/visualizar.html"
     })
+    
+    // editar  
+	.when("/medicoedit/:id", {
+		controller : "medicoController",
+		templateUrl : "medico/cadastro.html"
+	})  
 
     // novo
     .when("/medico/cadastro", {
@@ -53,15 +59,30 @@ app.controller('medicoController', function($scope, $http, $location, $routePara
     $scope.salvarMedico = function() {
         $http.post("medico/salvar", $scope.medico).success(function(response) {
             $scope.medico = {};
-            alert('salvo com sucesso');
+            sucesso('salvo com sucesso');
         }).error(function(response) {
-            alert('Error salvar' + status);
+        	erro('Error salvar' + status);
         });
     };
+    
+    // remover médico
+	$scope.removerMedico = function(codMedico) {
+		$http.delete("medico/deletar/" + codMedico).success(function(response){
+			$scope.listarMedicos();
+			sucesso("Apagado com sucesso");
+		}).error(function(data, status, headers, config){
+			erro("Error deletar: " + status);
+		});
+	}; 
 
     // visualizar médico	
     $scope.visualizarMedico = function(id) {
         $location.path('medicovisualizar/' + id);
+    };
+    
+    // editar médico	
+    $scope.editarMedico = function(id) {
+        $location.path('medicoedit/' + id);
     };
 
 });

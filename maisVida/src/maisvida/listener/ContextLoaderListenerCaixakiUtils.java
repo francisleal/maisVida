@@ -14,8 +14,7 @@ public class ContextLoaderListenerCaixakiUtils extends
 	private static final long serialVersionUID = 1L;
 
 	private static WebApplicationContext getWac() {
-		return WebApplicationContextUtils
-				.getWebApplicationContext(getCurrentWebApplicationContext().getServletContext());
+		return WebApplicationContextUtils.getWebApplicationContext(getCurrentWebApplicationContext().getServletContext());
 	}
 	
 	/**

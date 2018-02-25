@@ -2,6 +2,16 @@ label {
     width: 100%;
 }
 
+
+a.maisvidaeditar:after  {
+    content: ' \270E';
+}
+
+a.maisvidaexcluir:after {
+	content: ' \274C';
+	curpor:pointer;
+}
+
 .status > input {
 	width: 20px;
 	margin-top: 8px;

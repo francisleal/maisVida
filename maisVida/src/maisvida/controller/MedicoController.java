@@ -50,13 +50,14 @@ public class MedicoController extends DaoImplementacao<Medico> implements DaoInt
 		return new Gson().toJson(objeto).getBytes("UTF-8");
 	}
 	
-//	@RequestMapping(value="deletar/{codMedico}", method=RequestMethod.DELETE)
-//	public @ResponseBody String deletar(@PathVariable("codMedico") String codMedico) throws Exception {
-//		Medico objeto = new Medico();		
-//		objeto.setId(Long.parseLong(codMedico));
-//		super.deletar(objeto);
-//		return "";
-//	}
+	//deletar médico por id
+	@RequestMapping(value="deletar/{codMedico}", method=RequestMethod.DELETE)
+	public @ResponseBody String deletar(@PathVariable("codMedico") String codMedico) throws Exception {
+		Medico objeto = new Medico();		
+		objeto.setId(Long.parseLong(codMedico));
+		super.deletar(objeto);
+		return "";
+	}
 	
 }
 
