@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
 </head>
 
-<div class="col-12 col-md-12" ng-init="carregarEstados();">
+<div class="col-12 col-md-12">
 
     <h6 class="border-bottom border-gray pb-2 mb-0">Cadastro de Médicos</h6>
     <br>
@@ -107,43 +107,5 @@
         </form>
     </div>
 </div>
-<script>
-    $(document).ready(function() {
-
-        $.getJSON('resources/js/estados_cidades.json', function(data) {
-
-            var items = [];
-            var options = '<option value="">Selecione...</option>';
-
-            $.each(data, function(key, val) {
-                options += '<option value="' + val.sigla + '">' + val.sigla + '</option>';
-            });
-            $("#estados").html(options);
-
-            $("#estados").change(function() {
-
-                var options_cidades = '';
-                var str = "";
-
-                $("#estados option:selected").each(function() {
-                    str += $(this).text();
-                });
-
-                $.each(data, function(key, val) {
-                    if (val.sigla == str) {
-                        $.each(val.cidades, function(key_city, val_city) {
-                            options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
-                        });
-                    }
-                });
-
-                $("#cidades").html(options_cidades);
-
-            }).change();
-
-        });
-
-    });
-</script>
 
 </html>
