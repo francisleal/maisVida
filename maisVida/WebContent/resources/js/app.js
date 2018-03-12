@@ -44,7 +44,18 @@ app.controller('medicoController', function($scope, $http, $location, $routePara
             	$scope.ativo = "Sim";
             }else{
             	$scope.ativo = "Não";
-            }
+            };
+            
+            if($scope.medico.status == true) {
+            	$scope.status = "Ocupado";
+            }else{
+            	$scope.status = "Disponível";
+            };
+            
+            setTimeout(function(){
+            	$('#cidades').children('option').eq(0).attr('value',$scope.medico.cidade).html($scope.medico.cidade);
+            },70);
+
             
         }).error(function(data, status, headers, config) {
             erro("Error buscarMedico : " + status);
@@ -65,7 +76,8 @@ app.controller('medicoController', function($scope, $http, $location, $routePara
     // salvar médico
     $scope.salvarMedico = function() {
         $http.post("medico/salvar", $scope.medico).success(function(response) {
-            $scope.medico = {};
+            $scope.medico = {};            
+            $location.path('/medicolist/');
             sucesso('salvo com sucesso');
         }).error(function(response) {
         	erro('Error salvar' + status);
@@ -92,45 +104,35 @@ app.controller('medicoController', function($scope, $http, $location, $routePara
         $location.path('medicoedit/' + id);
     };
     
-    carregarCidadesEstados();
+    { //carregarCidadesEstados
+    	setTimeout(function(){ 
+    		$.getJSON('resources/js/estados_cidades.json', function(data) {
+    			
+    	        $("#estados").change(function() {
+    	            var options_cidades = '';
+    	            var str = "";
 
+    	            $("#estados option:selected").each(function() {
+    	                str += $(this).text();
+    	            });
 
+    	            $.each(data, function(key, val) {
+    	                if (val.sigla == str) {
+    	                    $.each(val.cidades, function(key_city, val_city) {
+    	                        options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+    	                    });
+    	                }
+    	            });
+
+    	            $("#cidades").html(options_cidades);
+    	        }).change();
+    	    });
+    	},50);	
+    };  
+    
 });
 
-function carregarCidadesEstados() {
-	$.getJSON('resources/js/estados_cidades.json', function(data) {
 
-        var items = [];
-        var options = '<option value="">Selecione...</option>';
-
-        $.each(data, function(key, val) {
-            options += '<option value="' + val.sigla + '">' + val.sigla + '</option>';
-        });
-        $("#estados").html(options);
-
-        $("#estados").change(function() {
-
-            var options_cidades = '';
-            var str = "";
-
-            $("#estados option:selected").each(function() {
-                str += $(this).text();
-            });
-
-            $.each(data, function(key, val) {
-                if (val.sigla == str) {
-                    $.each(val.cidades, function(key_city, val_city) {
-                        options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
-                    });
-                }
-            });
-
-            $("#cidades").html(options_cidades);
-
-        }).change();
-
-    });
-};
 
 function erro(texto) {
     $.notify({

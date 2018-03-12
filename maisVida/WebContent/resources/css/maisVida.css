@@ -12,6 +12,17 @@ a.maisvidaexcluir:after {
 	curpor:pointer;
 }
 
+table.maisvidatable thead tr th:nth-of-type(5),
+table.maisvidatable thead tr th:nth-of-type(6),
+table.maisvidatable thead tr th:nth-of-type(7),
+table.maisvidatable thead tr th:nth-of-type(8),
+table.maisvidatable tbody tr td:nth-of-type(5),
+table.maisvidatable tbody tr td:nth-of-type(6),
+table.maisvidatable tbody tr td:nth-of-type(7),
+table.maisvidatable tbody tr td:nth-of-type(8)  {
+	text-align: center;
+}
+
 .status > input {
 	width: 20px;
 	margin-top: 8px;
@@ -22,7 +33,7 @@ a.maisvidaexcluir:after {
     content: ' \2764';
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 990px) {
     .maisvidaview {
         overflow-x: scroll;
     }

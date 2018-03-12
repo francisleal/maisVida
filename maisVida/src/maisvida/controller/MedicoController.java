@@ -24,7 +24,6 @@ public class MedicoController extends DaoImplementacao<Medico> implements DaoInt
 	}
 	
 	//salvar 
-	@SuppressWarnings("rawtypes")
 	@RequestMapping(value="salvar", method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity salvar(@RequestBody String jsonMedico) throws Exception {

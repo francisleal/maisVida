@@ -17,7 +17,7 @@ public interface DaoInterface<T> {
 	
 	void salvarOuAtualizar (T objeto) throws Exception;
 	
-	T merge(T objeto) throws Exception;
+//	T merge(T objeto) throws Exception;
 	
 	List<T> lista() throws Exception;
 	

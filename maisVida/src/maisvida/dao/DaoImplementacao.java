@@ -34,7 +34,7 @@ public abstract class DaoImplementacao<T> implements DaoInterface<T> {
 	// atualizar
 	@Override
 	public void atualizar(T objeto) throws  Exception {
-		sf.getCurrentSession().delete(objeto);
+		sf.getCurrentSession().update(objeto);
 		sf.getCurrentSession().flush();
 	}
 	
@@ -45,13 +45,13 @@ public abstract class DaoImplementacao<T> implements DaoInterface<T> {
 		sf.getCurrentSession().flush();
 	}
 	
-	@SuppressWarnings("unchecked")
-	@Override
-	public T merge(T objeto) throws Exception {
-		T t = (T) sf.getCurrentSession().merge(objeto);
-		sf.getCurrentSession().flush();
-		return t;
-	}
+//	@SuppressWarnings("unchecked")
+//	@Override
+//	public T merge(T objeto) throws Exception {
+//		T t = (T) sf.getCurrentSession().merge(objeto);
+//		sf.getCurrentSession().flush();
+//		return t;
+//	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -59,6 +59,7 @@ public abstract class DaoImplementacao<T> implements DaoInterface<T> {
 		return sf.getCurrentSession().createCriteria(persistenceClass).list();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public T loadObjeto(Long codigo) throws Exception {
 		return (T) sf.getCurrentSession().get(persistenceClass, codigo);

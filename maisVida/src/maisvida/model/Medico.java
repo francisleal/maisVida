@@ -20,7 +20,7 @@ public class Medico {
 	
 	private boolean ativo;
 	
-	private String status;
+	private boolean status;
 	
 	private String especialidade;
 	
@@ -66,14 +66,6 @@ public class Medico {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	@Override
@@ -123,6 +115,14 @@ public class Medico {
 
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 	
 	
